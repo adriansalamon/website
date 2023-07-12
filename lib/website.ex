@@ -13,8 +13,8 @@ defmodule Website do
   def index(assigns) do
     ~H"""
     <.layout>
-      <h1>Adrians website</h1>
-      <ul>
+      <h1 class="text-blue-500">Adrians website</h1>
+      <ul class="flex">
         <li :for={post <- @posts}>
           <a href={post.path}>
             <%= post.title %>
@@ -28,6 +28,10 @@ defmodule Website do
   def layout(assigns) do
     ~H"""
     <html>
+      <head>
+        <link rel="stylesheet" href="/assets/app.css" />
+        <script type="text/javascript" src="/assets/app.js" />
+      </head>
       <body>
         <%= render_slot(@inner_block) %>
       </body>

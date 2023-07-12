@@ -7,7 +7,14 @@ defmodule Website.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps()
+    ]
+  end
+
+  defp aliases() do
+    [
+      "site.build": ["build", "tailwind default --minify", "esbuild default --minify"]
     ]
   end
 
@@ -22,7 +29,9 @@ defmodule Website.MixProject do
   defp deps do
     [
       {:nimble_publisher, "~> 1.0"},
-      {:phoenix_live_view, "~> 0.19"}
+      {:phoenix_live_view, "~> 0.19"},
+      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.7", runtime: Mix.env() == :dev}
     ]
   end
 end
