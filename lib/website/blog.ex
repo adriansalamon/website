@@ -5,7 +5,7 @@ defmodule Website.Blog do
     build: Post,
     from: "./posts/**/*.md",
     as: :posts,
-    highlighters: []
+    highlighters: [:makeup_elixir]
 
   @posts Enum.sort_by(@posts, & &1.date, {:desc, Date})
 

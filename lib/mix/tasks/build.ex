@@ -9,6 +9,6 @@ defmodule Mix.Tasks.Build do
       end)
 
     ms = micro / 1000
-    IO.puts("Built in #{ms}ms")
+    IO.puts("Built in #{ms}ms ⚡️")
   end
 end
