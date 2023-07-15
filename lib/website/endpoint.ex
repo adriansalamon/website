@@ -3,7 +3,7 @@ defmodule Website.Endpoint do
 
   if Mix.env() == :dev do
     plug Website.LiveReload.Plug
-    plug Plug.Static.IndexHtml
+    plug Website.LiveReload.IndexHtml
     plug Plug.Static, at: "/", from: "output", only: ~w(assets)
     plug Website.LiveReload.StaticHTML, at: "/", from: "output"
     plug Website.LiveReload.SocketRouter

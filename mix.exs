@@ -33,6 +33,7 @@ defmodule Website.MixProject do
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.19"},
+      {:heroicons, "~> 0.5.1"},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:bandit, "~> 1.0-pre", only: :dev},
