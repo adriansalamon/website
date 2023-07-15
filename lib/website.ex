@@ -1,43 +1,6 @@
 defmodule Website do
   use Phoenix.Component
-  import Phoenix.HTML
-
-  def post(assigns) do
-    ~H"""
-    <.layout>
-      <%= raw(@post.body) %>
-    </.layout>
-    """
-  end
-
-  def index(assigns) do
-    ~H"""
-    <.layout>
-      <h1 class="text-blue-500">Adrians website</h1>
-      <ul class="flex">
-        <li :for={post <- @posts}>
-          <a href={post.path}>
-            <%= post.title %>
-          </a>
-        </li>
-      </ul>
-    </.layout>
-    """
-  end
-
-  def layout(assigns) do
-    ~H"""
-    <html>
-      <head>
-        <link rel="stylesheet" href="/assets/app.css" />
-        <script type="text/javascript" src="/assets/app.js" />
-      </head>
-      <body>
-        <%= render_slot(@inner_block) %>
-      </body>
-    </html>
-    """
-  end
+  import Website.Pages
 
   @output_dir "./output"
 

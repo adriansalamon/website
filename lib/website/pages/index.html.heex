@@ -1,0 +1,11 @@
+<.layout>
+  <h1 class="text-red-500">Adrians website is very cool!</h1>
+  <div>And it can live-reload!</div>
+  <ul class="flex">
+    <li :for={post <- @posts}>
+      <a href={post.path}>
+        <%= post.title %>
+      </a>
+    </li>
+  </ul>
+</.layout>
