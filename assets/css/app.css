@@ -2,6 +2,33 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+
+@layer components {
+  .link-underline-active {
+    border-bottom-width: 0;
+    background-image: linear-gradient(transparent, transparent),
+      linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+  }
+
+  .link-underline {
+    border-bottom-width: 0;
+    background-image: linear-gradient(transparent, transparent),
+      linear-gradient(currentColor, currentColor);
+    background-size: 0 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    @apply transition-all duration-300;
+  }
+
+  .link-underline:hover {
+    background-size: 100% 1px;
+    background-position: 0 100%;
+  }
+}
+
 .makeup .hll {background-color: #31353f}
 .makeup {background-color: #282c34}.makeup .unselectable {
   -webkit-touch-callout: none;

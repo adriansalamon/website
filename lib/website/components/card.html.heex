@@ -1,0 +1,56 @@
+<.dynamic_tag name={@as} class="group relative flex flex-col items-start">
+  <.dynamic_tag
+    :for={eyebrow <- @eyebrow}
+    name={Map.get(eyebrow, :as, "p")}
+    class={[
+      "relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400",
+      Map.get(eyebrow, :decorate, true) && "pl-3.5"
+    ]}
+  >
+    <span
+      :if={Map.get(eyebrow, :decorate, true)}
+      class="absolute inset-0 left-0 flex items-center"
+      aria-hidden="true"
+    >
+      <span class="h-4 w-0.5 rounded-full bg-zinc-200 " />
+    </span>
+    <%= render_slot(eyebrow) %>
+  </.dynamic_tag>
+
+  <h2 :for={title <- @title} class="text-base font-semibold tracking-tight text-zinc-800">
+    <%= if Map.has_key?(title, :href) do %>
+      <div class="absolute -inset-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl" />
+      <.link href={title.href}>
+        <span class="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+        <span class="relative z-10">
+          <%= render_slot(title) %>
+        </span>
+      </.link>
+    <% else %>
+      <%= render_slot(title) %>
+    <% end %>
+  </h2>
+
+  <%= for link <- @link do %>
+    <div class="absolute -inset-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl" />
+    <.link href={link.href}>
+      <span class="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+      <span class="relative z-10">
+        <%= render_slot(link) %>
+      </span>
+    </.link>
+  <% end %>
+
+  <p :if={@description != []} class="relative z-10 mt-2 text-sm text-zinc-600">
+    <%= render_slot(@description) %>
+  </p>
+
+  <div
+    :if={@cta != []}
+    aria-hidden="true"
+    class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
+  >
+    <%= render_slot(@cta) %>
+    <.icon name={:chevron_right} className="ml-1 h-4 w-4 stroke-current" />
+  </div>
+</.dynamic_tag>

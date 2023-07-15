@@ -1,0 +1,22 @@
+<header class="relative z-50 flex flex-col">
+  <div class="top-0 z-10 h-16 mt-2">
+    <.outer_container class="w-full">
+      <div class="py-6 border-b">
+        <.inner_container>
+          <div class="relative flex items-center gap-2 sm:gap-4">
+            <div class="flex flex-1">
+              <div class="h-8 w-8 sm:h-10 sm:w-10 rounded-full overflow-hidden bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
+                <.link href="/" aria-label="Home" class="pointer-events-auto">
+                  <img src="https://picsum.photos/250" class="rounded-full object-cover" />
+                </.link>
+              </div>
+            </div>
+            <.nav_link href="/blog" name="Blog" active={@page == :blog} />
+            <.nav_link href="/projects" name="Projects" active={@page == :projects} />
+            <.nav_link href="/about" name="About" active={@page == :about} />
+          </div>
+        </.inner_container>
+      </div>
+    </.outer_container>
+  </div>
+</header>
