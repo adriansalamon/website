@@ -1,5 +1,65 @@
 <.layout page={:about}>
   <:head>
-    <title>About</title>
+    <title>About - Adrian Salamon</title>
   </:head>
+
+  <.container class="mt-16 sm:mt-32">
+    <div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+      <div class="lg:pl-20">
+        <div class="max-w-xs px-2.5 lg:max-w-none">
+          <img
+            src="/assets/static/adrian.jpeg"
+            alt="Adrian Salamon"
+            class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover"
+          />
+        </div>
+      </div>
+      <div class="lg:order-first lg:row-span-2">
+        <h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
+          Who am i?
+        </h1>
+        <div class="mt-6 space-y-7 text-base text-zinc-600 prose">
+          <p>
+            I'm a swedish student and software developer. I'm currently studying my 4<sup>th</sup> year in
+            Computer Science with focus on machine learning at KTH Royal Institute of Technology
+            in Stockholm, Sweden. I will be doing an exchange year at University of Washington in Seattle, USA
+            during the coming year.
+          </p>
+          <p>
+            As a software developer I like working with a wide range of technologies. I have
+            experience with both frontend and backend development in multiple languages and frameworks,
+            and some experience with machine learning and data science. Technologies I particularly
+            enjoy working with, as can be seen on this website, are Elixir and Rust. Check out some
+            of my <a href="/projects">projects</a>.
+          </p>
+          <p>
+            When I'm not studying or working I like to spend my time doing what I love. This usually
+            entails kitesurfing, alpine skiing, sail racing, climbing, etc. I previously competed in
+            sailing, becoming a European champion in the 29er, but now I mostly sail for fun. I also
+            enjoy woodworking, photography, and cooking.
+          </p>
+        </div>
+      </div>
+      <div class="lg:pl-20">
+        <ul role="list">
+          <.about_social_link href="https://twitter.com" icon={:twitter}>
+            Follow me on Twitter
+          </.about_social_link>
+          <.about_social_link href="https://linkedin.com" icon={:linkedin} class="mt-4">
+            Connect on LinkedIn
+          </.about_social_link>
+          <.about_social_link href="https://github.com" icon={:github} class="mt-4">
+            Follow me on GitHub
+          </.about_social_link>
+          <.about_social_link
+            href="mailto:adr.salamon@gmail.com"
+            icon={:mail}
+            class="mt-8 border-t border-zinc-100 pt-8"
+          >
+            adr.salamon@gmail.com
+          </.about_social_link>
+        </ul>
+      </div>
+    </div>
+  </.container>
 </.layout>
