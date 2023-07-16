@@ -1,10 +1,11 @@
-<.dynamic_tag name={@as} class="group relative flex flex-col items-start">
+<.dynamic_tag name={@as} class={["group relative flex flex-col items-start", @class]}>
   <.dynamic_tag
     :for={eyebrow <- @eyebrow}
     name={Map.get(eyebrow, :as, "p")}
     class={[
       "relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400",
-      Map.get(eyebrow, :decorate, true) && "pl-3.5"
+      Map.get(eyebrow, :decorate, true) && "pl-3.5",
+      Map.get(eyebrow, :class, "")
     ]}
   >
     <span
@@ -45,12 +46,14 @@
     <%= render_slot(@description) %>
   </p>
 
+  <%= render_slot(@inner_block) %>
+
   <div
     :if={@cta != []}
     aria-hidden="true"
     class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
   >
     <%= render_slot(@cta) %>
-    <.icon name={:chevron_right} className="ml-1 h-4 w-4 stroke-current" />
+    <.icon name={:chevron_right} class="ml-1 h-4 w-4 stroke-current" />
   </div>
 </.dynamic_tag>

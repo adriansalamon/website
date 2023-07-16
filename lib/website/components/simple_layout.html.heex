@@ -1,0 +1,13 @@
+<.container class="mt-10 sm:mt-16">
+  <header class="max-w-2xl">
+    <h1 class="text-3xl font-bold tracking-tight text-zinc-800 sm:text-4xl">
+      <%= @title %>
+    </h1>
+    <p class="mt-6 text-base text-zinc-600">
+      <%= @intro %>
+    </p>
+  </header>
+  <div class="mt-16 sm:mt-20">
+    <%= render_slot(@inner_block) %>
+  </div>
+</.container>
