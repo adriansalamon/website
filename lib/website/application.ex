@@ -1,7 +1,7 @@
 defmodule Website.Application do
   def start(_type, _args) do
     children = [
-      {Bandit, plug: Website.Endpoint},
+      {Bandit, plug: Website.Router},
       {Website.LiveReload.Watcher, dirs: ["lib/", "assets/*"], name: :live_reload_watcher}
     ]
 

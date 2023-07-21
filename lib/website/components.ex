@@ -1,6 +1,7 @@
 defmodule Website.Components do
   use Phoenix.Component
   import Phoenix.HTML
+  import Website.LiveReload.LiveReloadComponent
 
   embed_templates "components/*"
 
