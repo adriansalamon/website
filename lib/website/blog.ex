@@ -3,7 +3,7 @@ defmodule Website.Blog do
 
   use NimblePublisher,
     build: Post,
-    from: "./posts/**/*.md",
+    from: "./priv/posts/**/*.md",
     as: :posts,
     highlighters: [:makeup_elixir]
 

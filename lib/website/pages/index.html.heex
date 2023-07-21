@@ -20,17 +20,17 @@
 
       <div class="mt-6 flex gap-6">
         <.index_social_link
-          href="https://twitter.com"
+          href="https://twitter.com/salamonadrian"
           aria-label="Follow on Twitter"
           icon={:twitter}
         />
         <.index_social_link
-          href="https://github.com"
+          href="https://github.com/adriansalamon"
           aria-label="Follow on GitHub"
           icon={:github}
         />
         <.index_social_link
-          href="https://linkedin.com"
+          href="https://linkedin.com/in/adriansalamon"
           aria-label="Follow on LinkedIn"
           icon={:linkedin}
         />
@@ -81,7 +81,7 @@
               <:eyebrow as="time">
                 <%= format_date(post.date) %>
               </:eyebrow>
-              <:title href={post.path}>
+              <:title href={post.url}>
                 <%= post.title %>
               </:title>
               <:description>
@@ -102,13 +102,13 @@
               name={:wrench_screwdriver}
               class="h-6 w-6 flex-none fill-zinc-100 stroke-zinc-400"
             />
-            <span class="ml-3">Projects</span>
+            <span class="ml-3">Featured projects</span>
           </h2>
           <ol class="mt-6 space-y-6">
             <li :for={project <- @projects} class="relative group flex gap-4">
               <div class="absolute -inset-4 -inset-y-2 rounded-2xl z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100  ">
               </div>
-              <.link href="/projects" class="z-10">
+              <.link href={project.url} class="z-10">
                 <span class="absolute z-20 -inset-x-4 -inset-y-2"></span>
                 <dl class="flex flex-auto flex-wrap gap-x-2">
                   <dt class="sr-only">Name</dt>

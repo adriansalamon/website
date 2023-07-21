@@ -8,26 +8,15 @@ defmodule Website do
   def build() do
     File.mkdir_p!(@output_dir)
     posts = Website.Blog.all_posts()
+    projects = Website.Projects.all_projects()
 
-    projects = [
-      %{
-        name: "Haj",
-        description: "A platform for METAspexet written in Elixir.",
-        link: %{url: "", label: "github.com"}
-      },
-      %{
-        name: "ClockClock24 Replica",
-        description: "A digital clock consisting of 24 analog clocks.",
-        link: %{url: "", label: "github.com"}
-      },
-      %{
-        name: "RLTCol",
-        description: "Reinforcement learning for solving the Graph Coloring Problem",
-        link: %{url: "", label: "github.com"}
-      }
-    ]
+    dbg(projects)
 
-    render_file("index.html", index(%{posts: posts, projects: projects}))
+    render_file(
+      "index.html",
+      index(%{posts: posts, projects: Website.Projects.featured_projects()})
+    )
+
     render_file("blog/index.html", blog(%{posts: posts}))
     render_file("projects/index.html", projects(%{projects: projects}))
     render_file("about/index.html", about(%{}))
@@ -40,6 +29,16 @@ defmodule Website do
       end
 
       render_file(post.path, post(%{post: post}))
+    end
+
+    for project <- projects do
+      dir = Path.dirname(project.path)
+
+      if dir != "." do
+        File.mkdir_p!(Path.join([@output_dir, dir]))
+      end
+
+      render_file(project.path, project(%{project: project}))
     end
 
     asset_files = File.ls!(@static_dir)

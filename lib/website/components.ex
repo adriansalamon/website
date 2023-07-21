@@ -136,7 +136,6 @@ defmodule Website.Components do
         "font-medium hover:text-zinc-800",
         (@active && "text-zinc-800") || " text-zinc-500"
       ]}
-      aria-link={@name}
     >
       <%= @name %>
     </.link>
@@ -157,7 +156,12 @@ defmodule Website.Components do
         (!@small && "h-8 w-8 sm:h-10 sm:w-10") || "h-7 w-7"
       ]}>
         <.link :if={Map.has_key?(assigns, :href)} href={@href} {@rest} class="pointer-events-auto">
-          <img src={@src} class="rounded-full object-cover" />
+          <.image
+            src={@src}
+            alt="Avatar"
+            class="rounded-full object-cover h-full w-full"
+            sizes="2.5rem"
+          />
         </.link>
         <img :if={!Map.has_key?(assigns, :href)} src={@src} class="rounded-full object-cover" />
       </div>
@@ -198,4 +202,67 @@ defmodule Website.Components do
   end
 
   def format_date(date), do: Calendar.strftime(date, "%B %d, %Y")
+
+  @static_path "./priv"
+  @output_path "./output/assets/static"
+  @breakpoints [16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920]
+
+  attr :src, :string, required: true
+  attr :sizes, :string, default: ""
+  attr :rest, :global
+
+  def image(assigns) do
+    if String.starts_with?(assigns.src, "/") do
+      static_image(assigns)
+    else
+      external_image(assigns)
+    end
+  end
+
+  defp external_image(assigns) do
+    ~H"""
+    <img src={@src} {@rest} />
+    """
+  end
+
+  defp static_image(assigns) do
+    src = assigns.src
+    path = Path.join(@static_path, src)
+
+    if File.exists?(path) do
+      image = Image.open!(path)
+
+      paths =
+        for breakpoint <- @breakpoints do
+          file = Path.split(path) |> List.last() |> String.split(".") |> hd()
+          out_path = Path.join(@output_path, "#{file}-#{breakpoint}.webp")
+
+          if !File.exists?(out_path) do
+            File.mkdir_p!(Path.dirname(out_path))
+
+            Image.thumbnail!(image, breakpoint)
+            |> Image.write!(out_path)
+          end
+
+          %{path: String.trim_leading(out_path, "./output"), w: breakpoint}
+        end
+
+      srcset =
+        Enum.map(paths, fn path ->
+          "#{path.path} #{path.w}w"
+        end)
+        |> Enum.join(", ")
+
+      assigns =
+        assigns
+        |> assign(:largest, List.last(paths).path)
+        |> assign(:srcset, srcset)
+
+      ~H"""
+      <img src={@largest} srcset={@srcset} sizes={@sizes} {@rest} loading="lazy" />
+      """
+    else
+      external_image(assigns)
+    end
+  end
 end
