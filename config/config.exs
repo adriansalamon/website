@@ -23,3 +23,8 @@ config :md,
   syntax: %{
     custom: [{"<.", {Website.Parser.Heex, %{}}}]
   }
+
+config :website,
+  live_reload_patterns: [
+    ~r"lib/website/.*.(he)?ex"
+  ]

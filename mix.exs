@@ -29,8 +29,7 @@ defmodule Website.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:nimble_publisher,
-       git: "https://github.com/adriansalamon/nimble_publisher", branch: "custom-md-parsers"},
+      {:nimble_publisher, git: "https://github.com/dashbitco/nimble_publisher"},
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
       {:md, "~> 0.9"},
@@ -41,7 +40,7 @@ defmodule Website.MixProject do
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:bandit, "~> 1.0-pre", only: :dev},
       {:plug_static_index_html, "~> 1.0", only: :dev},
-      {:file_system, "~> 0.2", only: :dev}
+      {:file_system, "~> 0.2", runtime: Mix.env() == :dev}
     ]
   end
 end

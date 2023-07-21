@@ -19,7 +19,6 @@
     </div>
     <div class="relative">
       <.nav page={@page} />
-
       <main>
         <%= render_slot(@inner_block) %>
       </main>
@@ -27,4 +26,6 @@
       <.footer />
     </div>
   </body>
+
+  <.live_reload_component :if={Mix.env() == :dev} />
 </html>

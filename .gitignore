@@ -26,3 +26,5 @@ website-*.tar
 /tmp/
 
 /output/
+
+.elixir_ls/
