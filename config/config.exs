@@ -18,3 +18,8 @@ config :tailwind,
          --output=../output/assets/app.css
        )
   ]
+
+config :md,
+  syntax: %{
+    custom: [{"<.", {Website.Parser.Heex, %{}}}]
+  }

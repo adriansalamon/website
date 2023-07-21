@@ -8,7 +8,7 @@
       <div class="flex max-w-3xl flex-col space-y-16">
         <article :for={post <- @posts} class="md:grid md:grid-cols-4 md:items-baseline">
           <.card class="md:col-span-3">
-            <:title href={post.path}>
+            <:title href={post.url}>
               <%= post.title %>
             </:title>
             <:eyebrow as="time" class="md:hidden" decorate>

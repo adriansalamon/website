@@ -29,9 +29,11 @@ defmodule Website.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:nimble_publisher, "~> 1.0"},
+      {:nimble_publisher,
+       git: "https://github.com/adriansalamon/nimble_publisher", branch: "custom-md-parsers"},
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
+      {:md, "~> 0.9"},
       {:phoenix_live_view, "~> 0.19"},
       {:heroicons, "~> 0.5.1"},
       {:image, "~> 0.28.0"},
