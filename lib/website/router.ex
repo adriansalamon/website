@@ -17,11 +17,16 @@ defmodule Website.Router do
   end
 
   defp recompile(conn, _) do
+    Website.LiveReload.CodeReloader.reload()
     conn
   end
 
   defp rerender(conn, _) do
-    Mix.Task.rerun("site.build")
+    headers = get_req_header(conn, "accept")
+
+    if Enum.any?(headers, &String.contains?(&1, "text/html")) do
+      Mix.Task.rerun("build")
+    end
 
     conn
   end

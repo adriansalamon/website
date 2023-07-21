@@ -14,7 +14,7 @@ defmodule Website.MixProject do
 
   defp aliases() do
     [
-      "site.build": ["build", "tailwind default --minify", "esbuild default --minify"]
+      "site.build": ["build", "tailwind default --minify"]
     ]
   end
 

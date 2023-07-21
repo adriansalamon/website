@@ -1,4 +1,4 @@
-defmodule Website.Parser.Heex do
+defmodule Website.Build.HEEXParser do
   alias Md.Parser.State
 
   @behaviour Md.Parser

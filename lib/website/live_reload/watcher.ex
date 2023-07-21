@@ -1,11 +1,11 @@
 defmodule Website.LiveReload.Watcher do
-  use GenServer
+  def child_spec(_) do
+    file_system_opts =
+      Keyword.merge([dirs: [Path.absname("")]], name: :live_reload_watcher, latency: 0)
 
-  def start_link(args) do
-    GenServer.start_link(__MODULE__, args)
-  end
-
-  def init(args) do
-    FileSystem.start_link(args)
+    %{
+      id: FileSystem,
+      start: {FileSystem, :start_link, [file_system_opts]}
+    }
   end
 end

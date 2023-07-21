@@ -1,6 +1,4 @@
-defmodule Website.HTMLConverter do
-  alias Phoenix.Template
-
+defmodule Website.Build.HTMLConverter do
   def convert(extname, content, _attrs, _opts) when extname in [".md"] do
     Md.generate(content)
   end

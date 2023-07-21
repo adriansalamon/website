@@ -21,10 +21,12 @@ config :tailwind,
 
 config :md,
   syntax: %{
-    custom: [{"<.", {Website.Parser.Heex, %{}}}]
+    custom: [{"<.", {Website.Build.HEEXParser, %{}}}]
   }
 
 config :website,
   live_reload_patterns: [
-    ~r"lib/website/.*.(he)?ex"
-  ]
+    ~r"lib/website/.*.(he)?ex",
+    ~r"priv/(posts|projects)/.*.md"
+  ],
+  assets: [tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}]
