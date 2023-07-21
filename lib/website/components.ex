@@ -204,8 +204,9 @@ defmodule Website.Components do
 
   def format_date(date), do: Calendar.strftime(date, "%B %d, %Y")
 
-  @static_path "./priv"
-  @output_path "./output/assets/static"
+  @content_dir Application.compile_env(:website, :content_dir, "priv/")
+  @output_dir Application.compile_env(:website, :output_dir, "output")
+  @output_path "#{@output_dir}/assets/static"
   @breakpoints [16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920]
 
   attr :src, :string, required: true
@@ -228,7 +229,7 @@ defmodule Website.Components do
 
   defp static_image(assigns) do
     src = assigns.src
-    path = Path.join(@static_path, src)
+    path = Path.join(@content_dir, src)
 
     if File.exists?(path) do
       image = Image.open!(path)
@@ -245,7 +246,7 @@ defmodule Website.Components do
             |> Image.write!(out_path)
           end
 
-          %{path: String.trim_leading(out_path, "./output"), w: breakpoint}
+          %{path: String.trim_leading(out_path, @output_dir), w: breakpoint}
         end
 
       srcset =
@@ -265,5 +266,21 @@ defmodule Website.Components do
     else
       external_image(assigns)
     end
+  end
+
+  def markdown_note(assigns) do
+    ~H"""
+    <div class="bg-teal-100 rounded-lg w-full px-4 py-2 not-prose">
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
+  end
+
+  def not_prose(assigns) do
+    ~H"""
+    <div class="not-prose">
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
   end
 end

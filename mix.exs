@@ -14,7 +14,7 @@ defmodule Website.MixProject do
 
   defp aliases() do
     [
-      "site.build": ["build", "tailwind default --minify"]
+      "site.build": ["build", "tailwind default --minify", "esbuild default --minify"]
     ]
   end
 
@@ -39,8 +39,7 @@ defmodule Website.MixProject do
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:bandit, "~> 1.0-pre", only: :dev},
-      {:plug_static_index_html, "~> 1.0", only: :dev},
-      {:file_system, "~> 0.2", runtime: Mix.env() == :dev}
+      {:file_system, "~> 0.2", only: :dev}
     ]
   end
 end

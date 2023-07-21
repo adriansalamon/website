@@ -1,5 +1,5 @@
 defmodule Website.Build.Render do
-  @output_dir "output"
+  @output_dir Application.compile_env(:website, :output_dir, "output")
 
   def render_file(path, rendered) do
     dir = Path.dirname(path)

@@ -6,8 +6,8 @@ defmodule Website do
   alias Website.Build.Posts
   alias Website.Build.Projects
 
-  @output_dir "./output"
-  @static_dir "./priv/assets"
+  @output_dir Application.compile_env(:website, :output_dir, "output")
+  @content_dir Application.compile_env(:website, :content_dir, "priv/")
 
   def build() do
     posts = Posts.all_posts()
@@ -30,10 +30,11 @@ defmodule Website do
       render_file(project.path, project(%{project: project}))
     end
 
-    asset_files = File.ls!(@static_dir)
+    asset_path = Path.join(@content_dir, "assets")
+    asset_files = File.ls!(asset_path)
 
     for file <- asset_files do
-      File.cp_r!(Path.join([@static_dir, file]), Path.join([@output_dir, "assets", file]))
+      File.cp_r!(Path.join([asset_path, file]), Path.join([@output_dir, "assets", file]))
     end
 
     :ok

@@ -1,11 +1,13 @@
 defmodule Website.Router do
   use Plug.Router, init_mode: :runtime
 
+  @output_dir Application.compile_env(:website, :output_dir, "output")
+
   plug :recompile
   plug :rerender
 
   plug Website.LiveReload.IndexHtml
-  plug Plug.Static, at: "/", from: "output", cache_control_for_etags: "no-cache"
+  plug Plug.Static, at: "/", from: @output_dir, cache_control_for_etags: "no-cache"
 
   plug :match
   plug :dispatch

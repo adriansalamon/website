@@ -2,12 +2,12 @@ defmodule Website.Build.Projects.Project do
   @enforce_keys [:name, :body, :tags, :description, :path, :link, :url]
   defstruct [:name, :body, :tags, :description, :path, :link, :url]
 
-  @base_dir "priv/"
+  @content_dir Application.compile_env(:website, :content_dir, "priv/")
 
   def build(filename, attrs, body) do
     url =
       Path.rootname(filename)
-      |> String.trim_leading(@base_dir)
+      |> String.trim_leading(@content_dir)
 
     path = Path.join(url, "index.html")
 
@@ -16,9 +16,11 @@ defmodule Website.Build.Projects.Project do
 end
 
 defmodule Website.Build.Projects do
+  @content_dir Application.compile_env(:website, :content_dir, "priv/")
+
   use NimblePublisher,
     build: __MODULE__.Project,
-    from: "priv/projects/**/*.md",
+    from: "#{@content_dir}/projects/**/*.md",
     as: :projects,
     html_converter: Website.Build.HTMLConverter
 
