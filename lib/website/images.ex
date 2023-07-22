@@ -74,13 +74,13 @@ defmodule Website.Images do
          x="47.746094"
          y="157.524"
          id="tspan1887"><tspan
-           style="font-family:DB Sans, Fira Sans, Noto Sans, DejaVu Sans, sans-serif;-inkscape-font-specification:'Helvetica Bold'"
+           style="font-family:Inter;"
            id="tspan1885">LINE_1
   </tspan></tspan><tspan
          x="47.746094"
          y="257.2046"
          id="tspan1891"><tspan
-           style="font-family:Helvetica;-inkscape-font-specification:'Helvetica Bold'"
+           style="font-family:Inter;"
            id="tspan1889">LINE_2
   </tspan></tspan><tspan
          x="47.746094"
