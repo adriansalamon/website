@@ -70,7 +70,7 @@ defmodule Website.Images do
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,0.33243642,-0.49706412)"
        id="text912"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:78px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;white-space:pre;shape-inside:url(#rect914);display:inline;fill:#1a1a1a;stroke:#000000;stroke-width:0.755906;paint-order:stroke fill markers;stop-color:#000000"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:78px;font-family:serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;white-space:pre;shape-inside:url(#rect914);display:inline;fill:#1a1a1a;stroke:#000000;stroke-width:0.755906;paint-order:stroke fill markers;stop-color:#000000"><tspan
          x="47.746094"
          y="157.524"
          id="tspan1887"><tspan
@@ -86,13 +86,13 @@ defmodule Website.Images do
          x="47.746094"
          y="356.8852"
          id="tspan1895"><tspan
-           style="font-family:Helvetica;-inkscape-font-specification:'Helvetica Bold'"
+           style="font-family:Inter;"
            id="tspan1893">LINE_3
   </tspan></tspan><tspan
          x="47.746094"
          y="456.56581"
          id="tspan1899"><tspan
-           style="font-family:Sans-Serif;-inkscape-font-specification:'Helvetica Bold'"
+           style="font-family:Inter;"
            id="tspan1897">LINE_4</tspan></tspan></text><text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,23.468821,21.082195)"
@@ -101,7 +101,7 @@ defmodule Website.Images do
          x="65.335938"
          y="483.65248"
          id="tspan1903"><tspan
-           style="font-family:Helvetica;-inkscape-font-specification:Helvetica"
+           style="font-family:Inter;"
            id="tspan1901">Adrian Salamon</tspan></tspan></text></g></svg>
   """
 
