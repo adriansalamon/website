@@ -1,6 +1,17 @@
 defmodule Website.Build.Posts.Post do
-  @enforce_keys [:id, :author, :title, :body, :description, :tags, :date, :path, :url]
-  defstruct [:id, :author, :title, :body, :description, :tags, :date, :path, :url]
+  @enforce_keys [
+    :id,
+    :author,
+    :title,
+    :body,
+    :description,
+    :reading_time,
+    :tags,
+    :date,
+    :path,
+    :url
+  ]
+  defstruct [:id, :author, :title, :body, :description, :reading_time, :tags, :date, :path, :url]
 
   @content_dir Application.compile_env(:website, :content_dir, "priv/")
 
@@ -13,12 +24,32 @@ defmodule Website.Build.Posts.Post do
     [month, day, id] = String.split(month_day_id, "-", parts: 3)
 
     date = Date.from_iso8601!("#{year}-#{month}-#{day}")
+    reading_time = reading_time(body)
 
     struct!(
       __MODULE__,
-      [id: id, date: date, body: body, path: "/" <> file_path, url: "/" <> path] ++
+      [
+        id: id,
+        date: date,
+        body: body,
+        reading_time: reading_time,
+        path: "/" <> file_path,
+        url: "/" <> path
+      ] ++
         Map.to_list(attrs)
     )
+  end
+
+  defp reading_time(body) do
+    words_per_minute = 200
+
+    words =
+      String.replace(body, ~r{<[^>]*>}, " ")
+      |> String.split(~r{\s+}, trim: true)
+      |> length()
+
+    Float.ceil(words / words_per_minute)
+    |> trunc()
   end
 end
 

@@ -5,7 +5,7 @@ defmodule Website.MixProject do
     [
       app: :website,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -36,6 +36,8 @@ defmodule Website.MixProject do
       {:phoenix_live_view, "~> 0.19"},
       {:heroicons, "~> 0.5.1"},
       {:image, "~> 0.28.0"},
+      {:phoenix_seo, "~> 0.1.8"},
+      {:jason, "~> 1.0"},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:bandit, "~> 1.0-pre", only: :dev},

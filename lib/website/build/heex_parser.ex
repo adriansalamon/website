@@ -1,9 +1,6 @@
 defmodule Website.Build.HEEXParser do
   require Phoenix.LiveView.TagEngine
-  alias Phoenix.HTML.Safe.Phoenix.LiveView
   alias Md.Parser.State
-
-  import Phoenix.Component
 
   @behaviour Md.Parser
 
@@ -28,7 +25,6 @@ defmodule Website.Build.HEEXParser do
           [content, rest] = String.split(rest, "</.#{tag}>", parts: 2)
           [tag, attrs, content, rest]
       end
-      |> dbg()
 
     quoted =
       Md.Parser.generate(content)

@@ -270,7 +270,7 @@ defmodule Website.Components do
 
   def markdown_note(assigns) do
     ~H"""
-    <div class="bg-teal-100 rounded-lg w-full px-4 py-2 not-prose">
+    <div class="bg-teal-100 rounded-lg w-full px-4 py-2">
       <%= render_slot(@inner_block) %>
     </div>
     """

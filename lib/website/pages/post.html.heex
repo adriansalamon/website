@@ -1,7 +1,6 @@
 <.layout>
   <:head>
-    <title><%= "#{@post.title} - Adrian Salamon" %></title>
-    <meta name="description" content={@post.description} />
+    <SEO.juice conn={@conn} config={Website.SEO.config()} page_title={@post.title} />
   </:head>
 
   <.container class="mt-16 lg:mt-20">
@@ -37,7 +36,9 @@
               class="order-first flex items-center text-base text-zinc-400"
             >
               <span class="h-4 w-0.5 rounded-full bg-zinc-200" />
-              <span class="ml-3"><%= format_date(@post.date) %></span>
+              <span class="ml-3">
+                <%= format_date(@post.date) %> • <%= @post.reading_time %> minute read
+              </span>
             </time>
           </header>
           <div class="mt-6 prose">

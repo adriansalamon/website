@@ -1,9 +1,12 @@
 <.layout page={:blog}>
   <:head>
-    <title>Blog</title>
+    <title>Blog - Adrian Salamon</title>
   </:head>
 
-  <.simple_layout title="Blog" intro="My personlal blog, everything from programming to life.">
+  <.simple_layout
+    title="Blog"
+    intro="My personal blog, with everything from programming to other random stuff."
+  >
     <div class="md:border-l md:border-zinc-100 md:pl-6">
       <div class="flex max-w-3xl flex-col space-y-16">
         <article :for={post <- @posts} class="md:grid md:grid-cols-4 md:items-baseline">

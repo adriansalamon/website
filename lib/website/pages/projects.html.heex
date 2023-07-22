@@ -1,11 +1,11 @@
 <.layout page={:projects}>
   <:head>
-    <title>Projects</title>
+    <title>Projects - Adrian Salamon</title>
   </:head>
 
   <.simple_layout
-    title="Personal projects"
-    intro="Some personal projects i have worked on. Many of them are open-source, and your are free to check them out and contribute."
+    title="Projects"
+    intro="Some projects i have worked on. Some of them are open-source, and your are free to check them out and contribute."
   >
     <ul role="list" class="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
       <.card :for={project <- @projects} as="li">

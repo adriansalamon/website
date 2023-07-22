@@ -19,6 +19,5 @@ belong to Humans Since 1982.
 
 I created my own version of the clock as a hobby project. This project involved
 designing a circuit, constructing a custom PCB, designing and manufacturing the
-frame, including some 3D-printed parts, and writing the firmware. I wrote a more
-comprehensive [blog post](/output/posts/2023/06-22-building-a-clock-clock-24-replica)
-about the project.
+frame, including some 3D-printed parts, and writing the firmware. I will be writing
+a more comprehensive blog post about this project in the future, so stay tuned.
