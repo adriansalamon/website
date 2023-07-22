@@ -35,7 +35,7 @@ defmodule Website.MixProject do
       {:md, "~> 0.9"},
       {:phoenix_live_view, "~> 0.19"},
       {:heroicons, "~> 0.5.1"},
-      {:image, "~> 0.28.0"},
+      {:image, "~> 0.36.0"},
       {:phoenix_seo, "~> 0.1.8"},
       {:jason, "~> 1.0"},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},

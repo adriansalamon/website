@@ -204,11 +204,6 @@ defmodule Website.Components do
 
   def format_date(date), do: Calendar.strftime(date, "%B %d, %Y")
 
-  @content_dir Application.compile_env(:website, :content_dir, "priv/")
-  @output_dir Application.compile_env(:website, :output_dir, "output")
-  @output_path "#{@output_dir}/assets/static"
-  @breakpoints [16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920]
-
   attr :src, :string, required: true
   attr :sizes, :string, default: ""
   attr :rest, :global
@@ -228,27 +223,11 @@ defmodule Website.Components do
   end
 
   defp static_image(assigns) do
-    src = assigns.src
-    path = Path.join(@content_dir, src)
+    alias Website.Images
+    source = assigns.src
 
-    if File.exists?(path) do
-      image = Image.open!(path)
-
-      paths =
-        for breakpoint <- @breakpoints do
-          file = Path.split(path) |> List.last() |> String.split(".") |> hd()
-          out_path = Path.join(@output_path, "#{file}-#{breakpoint}.webp")
-
-          if !File.exists?(out_path) do
-            File.mkdir_p!(Path.dirname(out_path))
-
-            Image.thumbnail!(image, breakpoint)
-            |> Image.write!(out_path)
-          end
-
-          %{path: String.trim_leading(out_path, @output_dir), w: breakpoint}
-        end
-
+    with true <- Images.file_exists?(source),
+         paths <- Images.generate_variants(source) do
       srcset =
         Enum.map(paths, fn path ->
           "#{path.path} #{path.w}w"
@@ -264,7 +243,7 @@ defmodule Website.Components do
       <img src={@largest} srcset={@srcset} sizes={@sizes} {@rest} loading="lazy" />
       """
     else
-      external_image(assigns)
+      _ -> external_image(assigns)
     end
   end
 

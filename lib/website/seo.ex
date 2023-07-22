@@ -30,7 +30,19 @@ defimpl SEO.OpenGraph.Build, for: Website.Build.Posts.Post do
           published_time: post.date,
           author: post.author,
           tags: post.tags
-        )
+        ),
+      image: image(post)
+    )
+  end
+
+  defp image(post) do
+    path = Website.Images.generate_og_image(post)
+
+    SEO.OpenGraph.Image.build(
+      url: path,
+      width: 1200,
+      height: 630,
+      alt: post.title
     )
   end
 end
