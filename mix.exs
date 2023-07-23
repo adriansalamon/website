@@ -32,7 +32,7 @@ defmodule Website.MixProject do
       {:nimble_publisher, git: "https://github.com/dashbitco/nimble_publisher"},
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
-      {:md, "~> 0.9"},
+      {:md, git: "https://github.com/adriansalamon/md", branch: "block-escape-html"},
       {:phoenix_live_view, "~> 0.19"},
       {:heroicons, "~> 0.5.1"},
       {:image, "~> 0.36.0"},
@@ -41,7 +41,8 @@ defmodule Website.MixProject do
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:bandit, "~> 1.0-pre", only: :dev},
-      {:file_system, "~> 0.2", only: :dev}
+      {:file_system, "~> 0.2", only: :dev},
+      {:tailwind_formatter, "~> 0.3.6", only: [:dev], runtime: false}
     ]
   end
 end

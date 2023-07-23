@@ -85,7 +85,7 @@ defmodule Website.Components do
   def index_social_link(assigns) do
     ~H"""
     <.link navigate={@href} class="group -m-1 p-1" {@rest}>
-      <.social_icon name={@icon} class="w-6 h-6 fill-zinc-500 transition group-hover:fill-zinc-600" />
+      <.social_icon name={@icon} class="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600" />
     </.link>
     """
   end
@@ -103,7 +103,7 @@ defmodule Website.Components do
       class={["group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500", @class]}
       {@rest}
     >
-      <.social_icon name={@icon} class="w-6 h-6 fill-zinc-500 transition group-hover:fill-teal-500" />
+      <.social_icon name={@icon} class="h-6 w-6 fill-zinc-500 transition group-hover:fill-teal-500" />
       <span class="ml-4">
         <%= render_slot(@inner_block) %>
       </span>
@@ -160,7 +160,7 @@ defmodule Website.Components do
           <.image
             src={@src}
             alt="Avatar"
-            class="rounded-full object-cover h-full w-full"
+            class="h-full w-full rounded-full object-cover"
             sizes="2.5rem"
           />
         </.link>
@@ -247,10 +247,15 @@ defmodule Website.Components do
     end
   end
 
-  def markdown_note(assigns) do
+  def callout(assigns) do
     ~H"""
-    <div class="bg-teal-100 rounded-lg w-full px-4 py-2">
-      <%= render_slot(@inner_block) %>
+    <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-sm lg:-mx-8">
+      <div class="flex flex-row items-center">
+        <.icon name={:information_circle} class="mr-2 h-6 w-6" />
+        <div class="prose-p:m-0">
+          <%= render_slot(@inner_block) %>
+        </div>
+      </div>
     </div>
     """
   end

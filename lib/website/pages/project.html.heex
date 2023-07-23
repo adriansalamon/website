@@ -11,7 +11,7 @@
           type="button"
           onclick="history.back()"
           aria-label="Go back to articles"
-          class="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0"
+          class="group shadow-zinc-800/5 ring-zinc-900/5 mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md ring-1 transition lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0"
         >
           <.icon
             name={:arrow_left}
@@ -21,13 +21,13 @@
 
         <article>
           <header class="flex flex-col">
-            <h1 class=" mt-6 text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
+            <h1 class="mt-6 text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
               <%= @project.name %>
             </h1>
             <div class="order-first flex items-center text-base text-zinc-400">
               <span class="h-4 w-0.5 rounded-full bg-zinc-200" />
-              <span class="ml-3 group relative">
-                <div class="absolute -inset-x-2 -inset-y-1 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 rounded-lg" />
+              <span class="group relative ml-3">
+                <div class="absolute -inset-x-2 -inset-y-1 z-0 scale-95 rounded-lg bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100" />
                 <.link href={@project.link.href} target="_blank">
                   <span class="absolute -inset-x-2 -inset-y-1 z-20 rounded-lg" />
                   <p class="relative z-10 flex items-center text-sm font-medium text-zinc-400 transition group-hover:text-teal-500">
@@ -38,7 +38,7 @@
               </span>
             </div>
           </header>
-          <div class="mt-6 prose">
+          <div class="prose mt-6">
             <%= raw(@project.body) %>
           </div>
         </article>

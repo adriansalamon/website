@@ -22,7 +22,7 @@ module.exports = {
       '8xl': ['6rem', { lineHeight: '1' }],
       '9xl': ['8rem', { lineHeight: '1' }],
     },
-    typography: (theme) => ({ 
+    typography: (theme) => ({
       DEFAULT: {
         css: {
           '--tw-prose-body': theme('colors.zinc.600'),
@@ -190,6 +190,10 @@ module.exports = {
             overflowX: 'auto',
             border: '1px solid',
             borderColor: 'var(--tw-prose-pre-border)',
+            '@media (min-width: theme("screens.lg"))': {
+              marginLeft: '-2em',
+              marginRight: '-2em',
+            },
           },
           'pre code': {
             display: 'inline',

@@ -69,9 +69,9 @@
   <.container class="mt-24 md:mt-28">
     <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
       <div>
-        <h2 class="font-semibold text-xl text-zinc-800">Recent blog posts</h2>
+        <h2 class="text-xl font-semibold text-zinc-800">Recent blog posts</h2>
 
-        <div class="flex flex-col gap-16 mt-8">
+        <div class="mt-8 flex flex-col gap-16">
           <div :for={post <- @posts}>
             <.card>
               <:eyebrow as="time">
@@ -100,18 +100,18 @@
             <span class="ml-3">Featured projects</span>
           </h2>
           <ol class="mt-6 space-y-6">
-            <li :for={project <- @projects} class="relative group flex gap-4">
-              <div class="absolute -inset-4 -inset-y-2 rounded-2xl z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100  ">
+            <li :for={project <- @projects} class="group relative flex gap-4">
+              <div class="absolute -inset-4 -inset-y-2 z-0 scale-95 rounded-2xl bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100">
               </div>
               <.link href={project.url} class="z-10">
-                <span class="absolute z-20 -inset-x-4 -inset-y-2"></span>
+                <span class="absolute -inset-x-4 -inset-y-2 z-20"></span>
                 <dl class="flex flex-auto flex-wrap gap-x-2">
                   <dt class="sr-only">Name</dt>
                   <dd class="w-full flex-none text-sm font-medium text-zinc-900">
                     <%= project.name %>
                   </dd>
                   <dt class="sr-only">Description</dt>
-                  <dd class="text-xs  text-zinc-500">
+                  <dd class="text-xs text-zinc-500">
                     <%= project.description %>
                   </dd>
                 </dl>
@@ -121,9 +121,9 @@
 
           <div
             aria-hidden="true"
-            class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500 hover:text-teal-700 transition-colors"
+            class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500 transition-colors hover:text-teal-700"
           >
-            <.link href="/projects" class="inline-flex items-center w-full">
+            <.link href="/projects" class="inline-flex w-full items-center">
               All projects <.icon name={:chevron_right} class="ml-1 h-4 w-4 stroke-current" />
             </.link>
           </div>
