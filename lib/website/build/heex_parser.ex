@@ -18,8 +18,6 @@ defmodule Website.Build.HEEXParser do
       |> Phoenix.HTML.Safe.to_iodata()
       |> IO.chardata_to_string()
 
-    dbg({rendered_html, rest})
-
     {rest, %State{state | ast: [rendered_html | state.ast]}}
   end
 
