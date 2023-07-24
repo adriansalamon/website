@@ -209,29 +209,18 @@ defmodule Website.Components do
   attr :rest, :global
 
   def image(assigns) do
-    if String.starts_with?(assigns.src, "/") do
-      static_image(assigns)
-    else
-      external_image(assigns)
-    end
+    if String.starts_with?(assigns.src, "/"),
+      do: static_image(assigns),
+      else: external_image(assigns)
   end
 
-  defp external_image(assigns) do
-    ~H"""
-    <img src={@src} {@rest} />
-    """
-  end
-
-  defp static_image(assigns) do
+  defp static_image(%{src: source} = assigns) do
     alias Website.Images
-    source = assigns.src
 
     with true <- Images.file_exists?(source),
          paths <- Images.generate_variants(source) do
       srcset =
-        Enum.map(paths, fn path ->
-          "#{path.path} #{path.w}w"
-        end)
+        Enum.map(paths, fn path -> "#{path.path} #{path.w}w" end)
         |> Enum.join(", ")
 
       assigns =
@@ -247,6 +236,12 @@ defmodule Website.Components do
     end
   end
 
+  defp external_image(assigns) do
+    ~H"""
+    <img src={@src} {@rest} />
+    """
+  end
+
   def callout(assigns) do
     ~H"""
     <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-sm lg:-mx-8">
@@ -260,9 +255,11 @@ defmodule Website.Components do
     """
   end
 
+  attr :class, :string, default: ""
+
   def not_prose(assigns) do
     ~H"""
-    <div class="not-prose">
+    <div class={["not-prose", @class]}>
       <%= render_slot(@inner_block) %>
     </div>
     """

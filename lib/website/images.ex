@@ -17,8 +17,8 @@ defmodule Website.Images do
     image = Image.open!(path)
 
     for breakpoint <- breakpoints do
-      file = Path.split(path) |> List.last() |> String.split(".") |> hd()
-      out_path = Path.join(@output_path, "#{file}-#{breakpoint}.#{format}")
+      file_name = Path.split(path) |> List.last() |> String.split(".") |> hd()
+      out_path = Path.join(@output_path, "#{file_name}-#{breakpoint}.#{format}")
 
       if !File.exists?(out_path) do
         File.mkdir_p!(Path.dirname(out_path))
@@ -70,7 +70,7 @@ defmodule Website.Images do
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,0.33243642,-0.49706412)"
        id="text912"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:78px;font-family:serif;-inkscape-font-specification:'sans-serif Bold';letter-spacing:0px;white-space:pre;shape-inside:url(#rect914);display:inline;fill:#1a1a1a;stroke:#000000;stroke-width:0.755906;paint-order:stroke fill markers;stop-color:#000000"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:78px;font-family:Inter;letter-spacing:0px;white-space:pre;shape-inside:url(#rect914);display:inline;fill:#1a1a1a;stroke:#000000;stroke-width:0.755906;paint-order:stroke fill markers;stop-color:#000000"><tspan
          x="47.746094"
          y="157.524"
          id="tspan1887"><tspan
@@ -97,7 +97,7 @@ defmodule Website.Images do
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,23.468821,21.082195)"
        id="text1076"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:hel;-inkscape-font-specification:hel;letter-spacing:0px;white-space:pre;shape-inside:url(#rect1078);display:inline;fill:#1a1a1a;stroke:#000000;stroke-width:0.755906;paint-order:stroke fill markers;stop-color:#000000"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:hel;letter-spacing:0px;white-space:pre;shape-inside:url(#rect1078);display:inline;fill:#1a1a1a;stroke:#000000;stroke-width:0.755906;paint-order:stroke fill markers;stop-color:#000000"><tspan
          x="65.335938"
          y="483.65248"
          id="tspan1903"><tspan
@@ -116,7 +116,7 @@ defmodule Website.Images do
       String.split(post.title, " ")
       |> Enum.reduce([], &wrap_words/2)
       |> Enum.reverse()
-      |> get_svg()
+      |> replace_headings()
       |> Image.from_svg!()
 
     base_image = Image.open!(Path.join(@content_dir, "assets/static/og-background.png"))
@@ -133,10 +133,12 @@ defmodule Website.Images do
   end
 
   defp wrap_words(word, [curr | rest] = acc) do
-    if String.length(curr <> " " <> word) > @max_length do
+    concatinated = curr <> " " <> word
+
+    if String.length(concatinated) > @max_length do
       [word | acc]
     else
-      [curr <> " " <> word | rest]
+      [concatinated | rest]
     end
   end
 
@@ -144,7 +146,7 @@ defmodule Website.Images do
     [word]
   end
 
-  defp get_svg(headings) do
+  defp replace_headings(headings) do
     {svg, _} =
       Enum.reduce(@tags, {@svg, headings}, fn tag, {svg, headings} ->
         case headings do

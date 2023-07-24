@@ -23,7 +23,7 @@ defmodule Website do
     render_file("about/index.html", about(%{}))
 
     for post <- posts do
-      conn = SEO.assign(Phoenix.ConnTest.build_conn(), post)
+      conn = SEO.assign(%Plug.Conn{}, post)
       render_file(post.path, post(%{post: post, conn: conn}))
     end
 

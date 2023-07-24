@@ -4,6 +4,8 @@
 module.exports = {
   content: [
     "../lib/**/*.*ex",
+    "../priv/posts/**/*.md",
+    "../priv/projects/**/*.md"
   ],
   theme: {
     extend: {},
