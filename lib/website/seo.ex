@@ -71,18 +71,22 @@ defimpl SEO.Twitter.Build, for: Website.Build.Posts.Post do
       description: post.description,
       title: post.title,
       site: "@salamonadrian",
-      creator: "@salamonadrian"
+      creator: "@salamonadrian",
+      image:
     )
   end
 end
 
 defimpl SEO.Unfurl.Build, for: Website.Build.Posts.Post do
   def build(post, _conn) do
+    img_path = Website.Images.generate_og_image(post)
+
     SEO.Unfurl.build(
       label1: "Reading time",
       data1: format_time(post.reading_time),
       label2: "Published",
-      data2: Date.to_iso8601(post.date)
+      data2: Date.to_iso8601(post.date),
+      image: Website.SEO.absolute_url(img_path)
     )
   end
 
