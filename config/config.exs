@@ -38,3 +38,5 @@ config :website,
   ],
   output_dir: output_dir,
   content_dir: "priv/"
+
+import_config "#{config_env()}.exs"

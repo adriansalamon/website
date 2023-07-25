@@ -16,16 +16,23 @@ defmodule Website.SEO do
       description: "Adrian Salamon's Blog"
     )
   end
+
+  def absolute_url(path) do
+    scheme = Application.get_env(:website, :scheme)
+    hostname = Application.get_env(:website, :hostname)
+    port = Application.get_env(:website, :port)
+
+    "#{scheme}://#{hostname}:#{port}#{path}"
+  end
 end
 
 defimpl SEO.OpenGraph.Build, for: Website.Build.Posts.Post do
   def build(post, _conn) do
     SEO.OpenGraph.build(
-      title: SEO.Utils.truncate(post.title, 70),
-      description: SEO.Utils.truncate(post.description, 200),
-      url: post.url,
-      type: :article,
-      type_detail:
+      title: post.title,
+      description: post.description,
+      url: Website.SEO.absolute_url(post.url),
+      detail:
         SEO.OpenGraph.Article.build(
           published_time: post.date,
           author: post.author,
@@ -39,7 +46,7 @@ defimpl SEO.OpenGraph.Build, for: Website.Build.Posts.Post do
     path = Website.Images.generate_og_image(post)
 
     SEO.OpenGraph.Image.build(
-      url: path,
+      url: Website.SEO.absolute_url(path),
       width: 1200,
       height: 630,
       alt: post.title
@@ -59,7 +66,13 @@ end
 
 defimpl SEO.Twitter.Build, for: Website.Build.Posts.Post do
   def build(post, _conn) do
-    SEO.Twitter.build(card: :summary, description: post.description, title: post.title)
+    SEO.Twitter.build(
+      card: :summary_large_image,
+      description: post.description,
+      title: post.title,
+      site: "@salamonadrian",
+      creator: "@salamonadrian"
+    )
   end
 end
 
@@ -79,8 +92,8 @@ end
 defimpl SEO.Breadcrumb.Build, for: Website.Build.Posts.Post do
   def build(post, _conn) do
     SEO.Breadcrumb.List.build([
-      %{name: "Posts", item: "/blog"},
-      %{name: post.title, item: post.url}
+      %{name: "Posts", item: Website.SEO.absolute_url("/blog")},
+      %{name: post.title, item: Website.SEO.absolute_url(post.url)}
     ])
   end
 end
