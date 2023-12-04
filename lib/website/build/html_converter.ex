@@ -1,7 +1,6 @@
 defmodule Website.Build.HTMLConverter do
-  def convert(extname, content, _attrs, opts) when extname in [".md"] do
-    highlighters = Keyword.get(opts, :highlighters, [])
-
-    Md.generate(content, format: :none) |> NimblePublisher.highlight(highlighters)
+  def convert(_path, content, _attrs, _opts) do
+    Md.generate(content, format: :none)
+    |> NimblePublisher.highlight(regex: ~r/<pre><code(?:\s+class="(\w*).*")?>([^<]*)<\/code><\/pre>/)
   end
 end
