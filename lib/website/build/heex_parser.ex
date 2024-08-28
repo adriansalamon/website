@@ -14,7 +14,7 @@ defmodule Website.Build.HEEXParser do
 
     # The tag is a component, which is just a function, we call it
     rendered_html =
-      apply(Website.Components, String.to_existing_atom(tag), [assigns])
+      apply(Website.Components, String.to_atom(tag), [assigns])
       |> Phoenix.HTML.Safe.to_iodata()
       |> IO.chardata_to_string()
 
