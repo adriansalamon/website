@@ -8,6 +8,7 @@ defmodule Website do
 
   @output_dir Application.compile_env(:website, :output_dir, "output")
   @content_dir Application.compile_env(:website, :content_dir, "priv/")
+  @static_dir Application.compile_env(:website, :static_dir, "priv/static")
 
   def build() do
     posts = Posts.all_posts()
@@ -36,6 +37,12 @@ defmodule Website do
 
     for file <- asset_files do
       File.cp_r!(Path.join([asset_path, file]), Path.join([@output_dir, "assets", file]))
+    end
+
+    static_files = File.ls!(@static_dir)
+
+    for file <- static_files do
+      File.cp_r!(Path.join([@static_dir, file]), Path.join([@output_dir, file]))
     end
 
     :ok
