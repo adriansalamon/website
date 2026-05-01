@@ -33,17 +33,17 @@ defmodule Website.MixProject do
       {:nimble_publisher, "~> 1.1"},
       {:makeup_elixir, ">= 0.0.0"},
       {:makeup_erlang, ">= 0.0.0"},
-      {:md, "~> 0.10.1"},
-      {:phoenix_live_view, "~> 0.19"},
+      {:md, "~> 0.12"},
+      {:phoenix_live_view, "~> 1.1"},
       {:heroicons, "~> 0.5.1"},
-      {:image, "~> 0.36.0"},
-      {:phoenix_seo, "~> 0.1.8"},
+      {:image, "~> 0.66.0"},
+      {:phoenix_seo, "~> 0.2.1"},
       {:jason, "~> 1.0"},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
-      {:bandit, "~> 1.0-pre", only: :dev},
-      {:file_system, "~> 0.2", only: :dev},
-      {:tailwind_formatter, "~> 0.3.6", only: [:dev], runtime: false}
+      {:bandit, "~> 1.10", only: :dev},
+      {:file_system, "~> 1.1", only: :dev},
+      {:tailwind_formatter, "~> 0.4.2", only: [:dev], runtime: false}
     ]
   end
 end

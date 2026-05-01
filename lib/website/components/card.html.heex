@@ -1,7 +1,7 @@
-<.dynamic_tag name={@as} class={["group relative flex flex-col items-start", @class]}>
+<.dynamic_tag tag_name={@as} class={["group relative flex flex-col items-start", @class]}>
   <.dynamic_tag
     :for={eyebrow <- @eyebrow}
-    name={Map.get(eyebrow, :as, "p")}
+    tag_name={Map.get(eyebrow, :as, "p")}
     class={[
       "relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400",
       Map.get(eyebrow, :decorate, true) && "pl-3.5",

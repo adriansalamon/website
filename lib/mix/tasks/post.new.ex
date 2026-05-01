@@ -8,7 +8,7 @@ defmodule Mix.Tasks.Post.New do
   def run([name]) do
     date = DateTime.utc_now() |> DateTime.to_date()
 
-    month_day = Date.to_iso8601(date) |> String.slice(5..-1)
+    month_day = Date.to_iso8601(date) |> String.slice(5..-1//-1)
 
     filename = "#{month_day}-#{name}.md"
 
