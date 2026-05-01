@@ -6,23 +6,22 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
     <link rel="shortcut icon" href="/assets/favicon.ico" />
-
+    <script>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
     <link rel="stylesheet" href="/assets/app.css" />
-    <script type="text/javascript" src="/assets/app.js" />
-    <%= render_slot(@head) %>
+    <script type="text/javascript" src="/assets/app.js">
+    </script>
+    {render_slot(@head)}
   </head>
-  <body class="flex h-full flex-col bg-zinc-50">
-    <div class="fixed inset-0 flex justify-center sm:px-8">
-      <div class="flex w-full max-w-7xl lg:px-8">
-        <div class="w-full bg-white ring-1 ring-zinc-100" />
-      </div>
-    </div>
-    <div class="relative">
+  <body class="flex h-full flex-col bg-white font-sans dark:bg-zinc-950">
+    <div class="relative flex-1">
       <.nav page={@page} />
-      <main>
-        <%= render_slot(@inner_block) %>
+      <main class="pb-24">
+        {render_slot(@inner_block)}
       </main>
-
       <.footer />
     </div>
   </body>

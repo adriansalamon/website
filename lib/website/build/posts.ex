@@ -60,7 +60,7 @@ defmodule Website.Build.Posts do
     build: __MODULE__.Post,
     from: "#{@content_dir}/posts/**/*.md",
     as: :posts,
-    highlighters: [:makeup_elixir],
+    highlighters: [:makeup_elixir, :makeup_eex, :makeup_html, :makeup_syntect],
     html_converter: Website.Build.HTMLConverter
 
   @posts Enum.sort_by(@posts, & &1.date, {:desc, Date})

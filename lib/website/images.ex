@@ -2,7 +2,7 @@ defmodule Website.Images do
   @content_dir Application.compile_env(:website, :content_dir, "priv/")
   @output_dir Application.compile_env(:website, :output_dir, "output")
   @output_path "#{@output_dir}/assets/static"
-  @breakpoints [16, 32, 48, 64, 96, 128, 256, 384, 640, 750, 828, 1080, 1200, 1920]
+  @breakpoints [32, 64, 128, 256, 384, 640, 828, 1080, 1200, 1920]
 
   def file_exists?(path) do
     path = Path.join(@content_dir, path)

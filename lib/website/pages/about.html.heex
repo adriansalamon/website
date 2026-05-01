@@ -1,68 +1,104 @@
 <.layout page={:about}>
   <:head>
     <title>About - Adrian Salamon</title>
+    <meta
+      name="description"
+      content="I'm Adrian, a Computer Science student and software engineer based in Stockholm."
+    />
   </:head>
 
-  <.container class="mt-16 sm:mt-32">
-    <div class="grid grid-cols-1 gap-y-16 lg:grid-rows-[auto_1fr] lg:grid-cols-2 lg:gap-y-12">
-      <div class="lg:pl-20">
-        <div class="max-w-xs px-2.5 lg:max-w-none">
-          <img
-            src="/assets/static/adrian.jpeg"
+  <div class="px-6 pt-14 pb-4 sm:px-8">
+    <div class="mx-auto max-w-2xl">
+      <h1 class="text-4xl font-medium text-zinc-900 font-serif dark:text-zinc-100">
+        About me
+      </h1>
+      <div class="prose mt-10 dark:prose-invert">
+        <p>
+          I'm a swedish student and software developer. I'm currently studying my 5<sup>th</sup> and final
+          year of my BS and MS in Computer Science with focus on Machine Learning at KTH Royal Institute
+          of Technology in Stockholm, Sweden.
+        </p>
+        <p>
+          As a software developer I like working with a wide range of technologies. I have
+          experience with both frontend and backend development in multiple languages and frameworks,
+          and some experience with machine learning and data science. Technologies I particularly
+          enjoy working with are Elixir and Rust. Check out some
+          of my <a href="/projects">projects</a>.
+        </p>
+        <p>
+          When I'm not studying or working I like to spend my time doing what I love. This usually
+          entails kitesurfing, alpine skiing, sail racing, climbing, etc. I previously competed in
+          sailing, becoming a European champion in the 29er, but now I mostly sail for fun. I also
+          enjoy woodworking and furniture making, photography, and cooking.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-3 items-center mt-14">
+        <div class="px-2.5 lg:max-w-none">
+          <.image
+            src="/assets/static/mexico.jpeg"
             alt="Adrian Salamon"
-            class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover"
+            class="rounded-lg bg-zinc-100 object-cover"
+            sizes="250px"
+          />
+        </div>
+        <div class="px-2.5 lg:max-w-none">
+          <.image
+            src="/assets/static/keb.jpeg"
+            alt="Adrian Salamon"
+            class="rounded-lg bg-zinc-100 object-cover"
+            sizes="220px"
+          />
+        </div>
+        <div class="px-2.5 lg:max-w-none">
+          <.image
+            src="/assets/static/tkov.jpeg"
+            alt="Adrian Salamon"
+            class="rounded-lg bg-zinc-100 object-cover"
+            sizes="220px"
           />
         </div>
       </div>
-      <div class="lg:order-first lg:row-span-2">
-        <h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
-          Who am I?
-        </h1>
-        <div class="prose mt-6 space-y-7 text-base text-zinc-600">
-          <p>
-            I'm a swedish student and software developer. I'm currently studying my 5<sup>th</sup> and final
-            year of my BS and MS in Computer Science with focus on Machine Learning at KTH Royal Institute
-            of Technology in Stockholm, Sweden.
-          </p>
-          <p>
-            As a software developer I like working with a wide range of technologies. I have
-            experience with both frontend and backend development in multiple languages and frameworks,
-            and some experience with machine learning and data science. Technologies I particularly
-            enjoy working with are Elixir and Rust. Check out some
-            of my <a href="/projects">projects</a>.
-          </p>
-          <p>
-            When I'm not studying or working I like to spend my time doing what I love. This usually
-            entails kitesurfing, alpine skiing, sail racing, climbing, etc. I previously competed in
-            sailing, becoming a European champion in the 29er, but now I mostly sail for fun. I also
-            enjoy woodworking and furniture making, photography, and cooking.
-          </p>
-        </div>
-      </div>
-      <div class="lg:pl-20">
-        <ul role="list">
-          <.about_social_link href="https://twitter.com/salamonadrian" icon={:twitter}>
-            Follow me on Twitter
-          </.about_social_link>
-          <.about_social_link
-            href="https://linkedin.com/in/adriansalamon"
-            icon={:linkedin}
-            class="mt-4"
-          >
-            Connect on LinkedIn
-          </.about_social_link>
-          <.about_social_link href="https://github.com/adriansalamon" icon={:github} class="mt-4">
-            Follow me on GitHub
-          </.about_social_link>
-          <.about_social_link
-            href="mailto:adrian@salamon.se"
-            icon={:mail}
-            class="mt-8 border-t border-zinc-100 pt-8"
-          >
-            adrian@salamon.se
-          </.about_social_link>
+
+      <div class="mt-10 pt-8 border-t border-zinc-100 dark:border-zinc-800/60">
+        <ul class="space-y-3">
+          <li>
+            <.link
+              href="https://github.com/adriansalamon"
+              class="flex items-center gap-3 text-sm text-zinc-500 transition-colors hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+            >
+              <.social_icon name={:github} class="h-4 w-4 fill-current flex-none" /> adriansalamon
+            </.link>
+          </li>
+          <li>
+            <.link
+              href="https://linkedin.com/in/adriansalamon"
+              class="flex items-center gap-3 text-sm text-zinc-500 transition-colors hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+            >
+              <.social_icon name={:linkedin} class="h-4 w-4 fill-current flex-none" />
+              adriansalamon
+            </.link>
+          </li>
+          <li>
+            <.link
+              href="https://twitter.com/salamonadrian"
+              class="flex items-center gap-3 text-sm text-zinc-500 transition-colors hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+            >
+              <.social_icon name={:twitter} class="h-4 w-4 fill-current flex-none" />
+              @salamonadrian
+            </.link>
+          </li>
+          <li>
+            <.link
+              href="mailto:adrian@salamon.se"
+              class="flex items-center gap-3 text-sm text-zinc-500 transition-colors hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+            >
+              <.social_icon name={:mail} class="h-4 w-4 fill-current flex-none" />
+              adrian@salamon.se
+            </.link>
+          </li>
         </ul>
       </div>
     </div>
-  </.container>
+  </div>
 </.layout>

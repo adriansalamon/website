@@ -41,10 +41,10 @@ the following nice additions:
   recompiles them and reloads the browser.
 - It allows for using `HEEx` components inside markdown files, for more
   expressive content.
-- It has a can optimize images at compile-time and generate different image
+- It can optimize images at compile-time and generate different image
   sizes using the `Image` library.
-- It has SEO tags for posts that makes then render nicely when shared on social
-  media. This includes automatically generating a nice image for each post.
+- It has SEO tags for posts that makes them render nicely when shared on social
+  media. This includes automatically generating a cover image for each post.
 
 ## Why roll your own SSG?
 
@@ -91,11 +91,14 @@ The component is defined in the following way:
 ```elixir
 def callout(assigns) do
   ~H"""
-  <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-xs lg:-mx-8">
-    <div class="flex flex-row items-center">
-      <.icon name={:information_circle} class="mr-2 h-6 w-6" />
-      <div class="prose-p:m-0">
-        <%= render_slot(@inner_block) %>
+  <div class="rounded-lg border border-amber-200 bg-amber-50 px-6 py-4 dark:border-amber-900/50 dark:bg-amber-950/30 lg:-mx-8">
+    <div class="flex flex-row items-center gap-3">
+      <.icon
+        name={:information_circle}
+        class="h-5 w-5 flex-none text-amber-600 dark:text-amber-400"
+      />
+      <div class="text-sm text-zinc-700 prose-p:m-0 dark:text-zinc-300">
+        {render_slot(@inner_block)}
       </div>
     </div>
   </div>
@@ -182,7 +185,7 @@ content into the `inner_block` slot of the component. This is done by
 recursively rendering the inner block of the component using `Md`, then
 converting the result into `EEx` using the `LiveView` engine, and finally
 assigning the result to the `inner_block` slot of the component. Check out
-the [full source code](https://forgejo.salamon.xyz/adrian/website/blob/main/lib/website/build/heex_parser.ex) 
+the [full source code](https://forgejo.salamon.xyz/adrian/website/src/branch/main/lib/website/build/heex_parser.ex)
 for more details.
 
 ## Image optimization
@@ -399,7 +402,8 @@ end
 
 This results in the following nice-looking preview image when sharing a link:
 
-<.image src="/assets/static/og-images/crafting-elixir-ssg.jpg" alt="OG image" />
+<.image src="/assets/static/og-images/crafting-elixir-ssg.jpg" alt="OG image" ></.image>
+
 ## Conclusion
 
 In the end, was it worth it to create my own SSG? I think so. I have learnt a lot

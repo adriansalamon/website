@@ -13,11 +13,10 @@ config :esbuild,
 config :tailwind,
   version: "4.2.4",
   default: [
-    cd: Path.expand("../assets", __DIR__),
+    cd: Path.expand("../", __DIR__),
     args: ~w(
-         --config=tailwind.config.js
-         --input=css/app.css
-         --output=../#{output_dir}/assets/app.css
+         --input=assets/css/app.css
+         --output=#{output_dir}/assets/app.css
        )
   ]
 

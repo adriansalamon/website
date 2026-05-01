@@ -48,7 +48,7 @@ defmodule Website.Components do
     ~H"""
     <.outer_container class={@class} {@rest}>
       <.inner_container>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </.inner_container>
     </.outer_container>
     """
@@ -62,7 +62,7 @@ defmodule Website.Components do
     ~H"""
     <div class={["sm:px-8", @class]} {@rest}>
       <div class="mx-auto max-w-7xl lg:px-8">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
     </div>
     """
@@ -72,7 +72,7 @@ defmodule Website.Components do
     ~H"""
     <div class="relative px-4 sm:px-8 lg:px-12">
       <div class="mx-auto max-w-2xl lg:max-w-5xl">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
     </div>
     """
@@ -105,7 +105,7 @@ defmodule Website.Components do
     >
       <.social_icon name={@icon} class="h-6 w-6 fill-zinc-500 transition group-hover:fill-teal-500" />
       <span class="ml-4">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </span>
     </.link>
     """
@@ -121,7 +121,7 @@ defmodule Website.Components do
     assigns = assign_new(assigns, :"aria-hidden", fn -> !Map.has_key?(assigns, :"aria-label") end)
 
     ~H"""
-    <%= apply(Heroicons, @name, [assigns]) %>
+    {apply(Heroicons, @name, [assigns])}
     """
   end
 
@@ -134,11 +134,12 @@ defmodule Website.Components do
     <.link
       href={@href}
       class={[
-        "font-medium hover:text-zinc-800",
-        (@active && "text-zinc-800") || " text-zinc-500"
+        "text-sm transition-colors hover:text-zinc-900 dark:hover:text-zinc-100",
+        (@active && "font-medium text-zinc-900 dark:text-zinc-100") ||
+          "text-zinc-500 dark:text-zinc-400"
       ]}
     >
-      <%= @name %>
+      {@name}
     </.link>
     """
   end
@@ -153,7 +154,7 @@ defmodule Website.Components do
     ~H"""
     <div class={@class}>
       <div class={[
-        "rounded-full overflow-hidden bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-sm",
+        "bg-white/90 shadow-zinc-800/5 ring-zinc-900/5 overflow-hidden rounded-full p-0.5 shadow-lg ring-1 backdrop-blur-sm",
         (!@small && "h-8 w-8 sm:h-10 sm:w-10") || "h-7 w-7"
       ]}>
         <.link :if={Map.has_key?(assigns, :href)} href={@href} {@rest} class="pointer-events-auto">
@@ -205,10 +206,13 @@ defmodule Website.Components do
   def format_date(date), do: Calendar.strftime(date, "%B %d, %Y")
 
   attr :src, :string, required: true
-  attr :sizes, :string, default: ""
+  # 2xl
+  attr :sizes, :string, default: "(max-width: 672px) 100vw, 672px"
   attr :rest, :global
 
   def image(assigns) do
+    assigns = assign_new(assigns, :class, fn -> "rounded-lg" end)
+
     if String.starts_with?(assigns.src, "/"),
       do: static_image(assigns),
       else: external_image(assigns)
@@ -229,7 +233,7 @@ defmodule Website.Components do
         |> assign(:srcset, srcset)
 
       ~H"""
-      <img src={@largest} srcset={@srcset} sizes={@sizes} {@rest} loading="lazy" />
+      <img src={@largest} srcset={@srcset} sizes={@sizes} class={@class} {@rest} loading="lazy" />
       """
     else
       _ -> external_image(assigns)
@@ -238,17 +242,20 @@ defmodule Website.Components do
 
   defp external_image(assigns) do
     ~H"""
-    <img src={@src} {@rest} />
+    <img src={@src} class={@class} {@rest} />
     """
   end
 
   def callout(assigns) do
     ~H"""
-    <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-xs lg:-mx-8">
-      <div class="flex flex-row items-center">
-        <.icon name={:information_circle} class="mr-2 h-6 w-6" />
-        <div class="prose-p:m-0">
-          <%= render_slot(@inner_block) %>
+    <div class="rounded-lg border border-amber-200 bg-amber-50 px-6 py-4 dark:border-amber-900/50 dark:bg-amber-950/30 lg:-mx-8">
+      <div class="flex flex-row items-center gap-3">
+        <.icon
+          name={:information_circle}
+          class="h-5 w-5 flex-none text-amber-600 dark:text-amber-400"
+        />
+        <div class="text-sm text-zinc-700 prose-p:m-0 dark:text-zinc-300">
+          {render_slot(@inner_block)}
         </div>
       </div>
     </div>
@@ -260,8 +267,52 @@ defmodule Website.Components do
   def not_prose(assigns) do
     ~H"""
     <div class={["not-prose", @class]}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
+    """
+  end
+
+  def project_links(assigns) do
+    ~H"""
+    <ul class="mt-4 divide-y divide-zinc-100 dark:divide-zinc-800/60">
+      <li :for={project <- @projects} class="py-4 first:pt-0">
+        <.link href={project.url} class="group flex items-baseline justify-between gap-6">
+          <div class="min-w-0">
+            <span class="transition-colors text-sm font-medium text-zinc-800 group-hover:text-zinc-500 dark:text-zinc-200 dark:group-hover:text-zinc-400 ">
+              {project.name}
+            </span>
+            <p class="mt-0.5 text-sm text-zinc-500 dark:text-zinc-400">
+              {project.description}
+            </p>
+          </div>
+          <span class="flex-none text-sm text-zinc-300 transition-colors group-hover:text-zinc-400 dark:text-zinc-700 dark:group-hover:text-zinc-500">
+            →
+          </span>
+        </.link>
+      </li>
+    </ul>
+    """
+  end
+
+  def posts_links(assigns) do
+    ~H"""
+    <ul class="mt-4 divide-y divide-zinc-100 dark:divide-zinc-800/60">
+      <li :for={post <- @posts} class="py-4 first:pt-0">
+        <.link href={post.url} class="group flex items-baseline justify-between gap-6">
+          <div class="min-w-0">
+            <span class="text-sm font-medium text-zinc-800 transition-colors group-hover:text-zinc-500 dark:text-zinc-200 dark:group-hover:text-zinc-400">
+              {post.title}
+            </span>
+            <p class="mt-0.5 text-sm text-zinc-500 dark:text-zinc-400">
+              {post.description}
+            </p>
+          </div>
+          <time class="flex-none text-xs text-zinc-400 whitespace-nowrap dark:text-zinc-500">
+            {format_date(post.date)}
+          </time>
+        </.link>
+      </li>
+    </ul>
     """
   end
 end

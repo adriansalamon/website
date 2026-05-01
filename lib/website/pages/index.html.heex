@@ -3,132 +3,79 @@
     <title>Adrian Salamon</title>
     <meta
       name="description"
-      content="I'm Adrian, a Coputer Science student and software engineer."
+      content="I'm Adrian, a Computer Science student and software engineer based in Stockholm."
     />
   </:head>
 
-  <.container class="mt-20">
-    <div class="max-w-2xl">
-      <h1 class="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
-        Software engineer and Computer Science student
-      </h1>
-      <p class="mt-6 text-base text-zinc-600">
-        Hi! I'm Adrian, a Computer Science student and software engineer from Stockholm, Sweden.
-
-        I'm currently studying Computer Science at KTH Royal Institute of Technology in Stockholm, Sweden.
-      </p>
-
-      <div class="mt-6 flex gap-6">
-        <.index_social_link
-          href="https://twitter.com/salamonadrian"
-          aria-label="Follow on Twitter"
-          icon={:twitter}
-        />
-        <.index_social_link
-          href="https://github.com/adriansalamon"
-          aria-label="Follow on GitHub"
-          icon={:github}
-        />
-        <.index_social_link
-          href="https://linkedin.com/in/adriansalamon"
-          aria-label="Follow on LinkedIn"
-          icon={:linkedin}
-        />
-      </div>
-    </div>
-  </.container>
-
-  <div class="mt-16 sm:mt-20">
-    <div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
-      <div
-        :for={
-          {source, i} <-
-            Enum.with_index([
-              "/assets/static/moth.jpg",
-              "/assets/static/29er.jpg",
-              "/assets/static/bat.jpeg",
-              "/assets/static/skid.jpg",
-              "/assets/static/adrian.jpeg"
-            ])
-        }
-        class={[
-          "relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl",
-          (rem(i, 2) == 0 && "-rotate-2") || "rotate-2"
-        ]}
-      >
-        <.image
-          src={source}
-          alt=""
-          sizes="(min-width: 640px) 18rem, 11rem"
-          class="h-full w-full object-cover"
-        />
-      </div>
-    </div>
-  </div>
-
-  <.container class="mt-24 md:mt-28">
-    <div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-      <div>
-        <h2 class="text-xl font-semibold text-zinc-800">Recent blog posts</h2>
-
-        <div class="mt-8 flex flex-col gap-16">
-          <div :for={post <- @posts}>
-            <.card>
-              <:eyebrow as="time">
-                <%= format_date(post.date) %>
-              </:eyebrow>
-              <:title href={post.url}>
-                <%= post.title %>
-              </:title>
-              <:description>
-                <%= post.description %>
-              </:description>
-              <:cta>
-                Read article
-              </:cta>
-            </.card>
-          </div>
-        </div>
-      </div>
-      <div class="lg:pl-16 xl:pl-24">
-        <div class="rounded-2xl border border-zinc-100 p-6">
-          <h2 class="flex text-sm font-semibold text-zinc-900">
-            <.icon
-              name={:wrench_screwdriver}
-              class="h-6 w-6 flex-none fill-zinc-100 stroke-zinc-400"
-            />
-            <span class="ml-3">Featured projects</span>
-          </h2>
-          <ol class="mt-6 space-y-6">
-            <li :for={project <- @projects} class="group relative flex gap-4">
-              <div class="absolute -inset-4 -inset-y-2 z-0 scale-95 rounded-2xl bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100">
-              </div>
-              <.link href={project.url} class="z-10">
-                <span class="absolute -inset-x-4 -inset-y-2 z-20"></span>
-                <dl class="flex flex-auto flex-wrap gap-x-2">
-                  <dt class="sr-only">Name</dt>
-                  <dd class="w-full flex-none text-sm font-medium text-zinc-900">
-                    <%= project.name %>
-                  </dd>
-                  <dt class="sr-only">Description</dt>
-                  <dd class="text-xs text-zinc-500">
-                    <%= project.description %>
-                  </dd>
-                </dl>
-              </.link>
-            </li>
-          </ol>
-
-          <div
-            aria-hidden="true"
-            class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500 transition-colors hover:text-teal-700"
-          >
-            <.link href="/projects" class="inline-flex w-full items-center">
-              All projects <.icon name={:chevron_right} class="ml-1 h-4 w-4 stroke-current" />
+  <div class="px-6 pt-14 pb-4 sm:px-8">
+    <div class="mx-auto max-w-2xl">
+      <div class="flex flex-row justify-between">
+        <div>
+          <h1 class="text-3xl font-medium text-zinc-900 leading-tight font-serif dark:text-zinc-100 sm:text-4xl">
+            Adrian Salamon
+          </h1>
+          <p class="mt-5 text-base text-zinc-500 leading-relaxed max-w-md dark:text-zinc-400">
+            Hi, I'm Adrian! I study Computer Science (ML) at KTH and like to build things. Based in Stockholm, Sweden.
+          </p>
+          <div class="mt-6 flex items-center gap-4">
+            <.link
+              href="https://github.com/adriansalamon"
+              class="text-zinc-400 transition-colors hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
+              aria-label="GitHub"
+            >
+              <.social_icon name={:github} class="h-5 w-5 fill-current" />
+            </.link>
+            <.link
+              href="https://linkedin.com/in/adriansalamon"
+              class="text-zinc-400 transition-colors hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
+              aria-label="LinkedIn"
+            >
+              <.social_icon name={:linkedin} class="h-5 w-5 fill-current" />
+            </.link>
+            <.link
+              href="https://twitter.com/salamonadrian"
+              class="text-zinc-400 transition-colors hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
+              aria-label="Twitter"
+            >
+              <.social_icon name={:twitter} class="h-5 w-5 fill-current" />
             </.link>
           </div>
         </div>
+        <div class="flex aspect-3/4 w-auto h-auto max-h-48 max-h-auto overflow-clip rounded-2xl">
+          <.image
+            src="/assets/static/mexico.jpeg"
+            alt="Adrian Salamon"
+            class="object-contain object-center scale-195"
+            sizes="300px"
+          />
+        </div>
       </div>
     </div>
-  </.container>
+  </div>
+  <div :if={length(@posts) > 0} class="px-6 mt-14 sm:px-8">
+    <div class="mx-auto max-w-2xl">
+      <h2 class="text-2xl font-medium text-zinc-900 mb-6 font-serif dark:text-zinc-100">
+        Writing
+      </h2>
+      <.posts_links posts={@posts} />
+    </div>
+  </div>
+
+  <div class="px-6 mt-16 sm:px-8 ">
+    <div class="mx-auto max-w-2xl">
+      <h2 class="text-2xl font-medium text-zinc-900 mb-6 font-serif dark:text-zinc-100">
+        Projects
+      </h2>
+      <.project_links projects={@projects} />
+
+      <div class="mt-4 pb-1">
+        <.link
+          href="/projects"
+          class="text-sm text-zinc-600 transition-colors hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300"
+        >
+          All projects →
+        </.link>
+      </div>
+    </div>
+  </div>
 </.layout>

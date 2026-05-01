@@ -1,26 +1,21 @@
 <.layout page={:projects}>
   <:head>
-    <title>Projects - Adrian Salamon</title>
+    <title>Projects — Adrian Salamon</title>
+    <meta name="description" content="Things I've built." />
   </:head>
 
-  <.simple_layout
-    title="Projects"
-    intro="Some projects i have worked on. Some of them are open-source, and your are free to check them out and contribute."
-  >
-    <ul role="list" class="grid grid-cols-1 gap-x-12 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-      <.card :for={project <- @projects} as="li">
-        <:link href={project.url}>
-          <h2 class="text-base font-semibold text-zinc-800">
-            <%= project.name %>
-          </h2>
-        </:link>
-        <:description>
-          <%= project.description %>
-        </:description>
-        <:cta>
-          Read more
-        </:cta>
-      </.card>
-    </ul>
-  </.simple_layout>
+  <div class="px-6 pt-14 pb-4 sm:px-8">
+    <div class="mx-auto max-w-2xl">
+      <h1 class="text-4xl font-medium text-zinc-900 font-serif dark:text-zinc-100">
+        Projects
+      </h1>
+      <p class="mt-4 text-base text-zinc-500 dark:text-zinc-400">
+        Things I've built, some open-source.
+      </p>
+
+      <div class="mt-10">
+        <.project_links projects={@projects} />
+      </div>
+    </div>
+  </div>
 </.layout>

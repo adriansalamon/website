@@ -15,7 +15,7 @@
     >
       <span class="h-4 w-0.5 rounded-full bg-zinc-200" />
     </span>
-    <%= render_slot(eyebrow) %>
+    {render_slot(eyebrow)}
   </.dynamic_tag>
 
   <h2 :for={title <- @title} class="text-base font-semibold tracking-tight text-zinc-800">
@@ -24,11 +24,11 @@
       <.link href={title.href}>
         <span class="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
         <span class="relative z-10">
-          <%= render_slot(title) %>
+          {render_slot(title)}
         </span>
       </.link>
     <% else %>
-      <%= render_slot(title) %>
+      {render_slot(title)}
     <% end %>
   </h2>
 
@@ -37,23 +37,23 @@
     <.link href={link.href}>
       <span class="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
       <span class="relative z-10">
-        <%= render_slot(link) %>
+        {render_slot(link)}
       </span>
     </.link>
   <% end %>
 
   <p :if={@description != []} class="relative z-10 mt-2 text-sm text-zinc-600">
-    <%= render_slot(@description) %>
+    {render_slot(@description)}
   </p>
 
-  <%= render_slot(@inner_block) %>
+  {render_slot(@inner_block)}
 
   <div
     :if={@cta != []}
     aria-hidden="true"
-    class="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
+    class="relative mt-4 flex items-center text-sm font-medium text-teal-500 z-10"
   >
-    <%= render_slot(@cta) %>
+    {render_slot(@cta)}
     <.icon name={:chevron_right} class="ml-1 h-4 w-4 stroke-current" />
   </div>
 </.dynamic_tag>

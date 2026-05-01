@@ -39,10 +39,12 @@ defmodule Website do
       File.cp_r!(Path.join([asset_path, file]), Path.join([@output_dir, "assets", file]))
     end
 
-    static_files = File.ls!(@static_dir)
+    if File.exists?(@static_dir) do
+      static_files = File.ls!(@static_dir)
 
-    for file <- static_files do
-      File.cp_r!(Path.join([@static_dir, file]), Path.join([@output_dir, file]))
+      for file <- static_files do
+        File.cp_r!(Path.join([@static_dir, file]), Path.join([@output_dir, file]))
+      end
     end
 
     :ok
