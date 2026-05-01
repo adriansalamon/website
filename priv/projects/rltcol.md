@@ -2,7 +2,7 @@
     name: "RLTCol",
     description: "Reinforcement learning for solving the Graph Coloring Problem.",
     link: %{href: "https://github.com/adriansalamon/RLTCol", label: "github.com"},
-    tags: ~w(featured)
+    tags: []
 }
 ---
 
