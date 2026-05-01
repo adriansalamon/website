@@ -208,6 +208,7 @@ defmodule Website.Components do
   attr :src, :string, required: true
   # 2xl
   attr :sizes, :string, default: "(max-width: 672px) 100vw, 672px"
+  attr :class, :any
   attr :rest, :global
 
   def image(assigns) do
