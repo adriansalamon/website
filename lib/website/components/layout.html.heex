@@ -11,8 +11,8 @@
         document.documentElement.classList.add('dark');
       }
     </script>
-    <link rel="stylesheet" href="/assets/app.css" />
-    <script type="text/javascript" src="/assets/app.js">
+    <link rel="stylesheet" href={Application.get_env(:website, :asset_css, "/assets/app.css")} />
+    <script type="text/javascript" src={Application.get_env(:website, :asset_js, "/assets/app.js")}>
     </script>
     {render_slot(@head)}
   </head>

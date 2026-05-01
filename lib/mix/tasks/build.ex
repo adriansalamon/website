@@ -5,7 +5,7 @@ defmodule Mix.Tasks.Build do
 
   @impl Mix.Task
   def run(_args) do
-    Mix.Task.run("app.start", ["--preload-modules"])
+    Mix.Task.run("compile", ["--no-purge"])
 
     {micro, :ok} =
       :timer.tc(fn ->

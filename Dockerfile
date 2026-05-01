@@ -52,7 +52,12 @@ server {
     error_page 404 /404.html;
 
     location /assets/ {
-        expires 1y;
+        expires 7d;
+        add_header Cache-Control "public";
+    }
+
+    location ~* "^/assets/app-[A-z0-9]+\.(css|js)$" {
+        expires 3m;
         add_header Cache-Control "public, immutable";
     }
 }

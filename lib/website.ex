@@ -10,7 +10,28 @@ defmodule Website do
   @content_dir Application.compile_env(:website, :content_dir, "priv/")
   @static_dir Application.compile_env(:website, :static_dir, "priv/static")
 
+  defp fingerprint_css do
+    src = Path.join(@output_dir, "assets/app.css")
+    content = File.read!(src)
+    hash = :crypto.hash(:sha256, content) |> Base.encode16(case: :lower) |> binary_part(0, 8)
+    hashed = "app-#{hash}.css"
+    File.rename!(src, Path.join(@output_dir, "assets/#{hashed}"))
+    "/assets/#{hashed}"
+  end
+
+  defp find_js do
+    case Path.wildcard(Path.join(@output_dir, "assets/app-*.js")) do
+      [path | _] -> "/assets/" <> Path.basename(path)
+      [] -> "/assets/app.js"
+    end
+  end
+
   def build() do
+    if Mix.env() == :prod do
+      Application.put_env(:website, :asset_css, fingerprint_css())
+      Application.put_env(:website, :asset_js, find_js())
+    end
+
     posts = Posts.all_posts()
     projects = Projects.all_projects()
 
