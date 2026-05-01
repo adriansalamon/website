@@ -42,7 +42,7 @@ defmodule Website.MixProject do
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:bandit, "~> 1.10", only: :dev},
-      {:file_system, "~> 1.1", only: :dev},
+      {:file_system, "~> 1.1", only: [:dev, :test]},
       {:tailwind_formatter, "~> 0.4.2", only: [:dev], runtime: false}
     ]
   end

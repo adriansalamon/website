@@ -182,7 +182,7 @@ content into the `inner_block` slot of the component. This is done by
 recursively rendering the inner block of the component using `Md`, then
 converting the result into `EEx` using the `LiveView` engine, and finally
 assigning the result to the `inner_block` slot of the component. Check out
-the [full source code](https://github.com/adriansalamon/website/blob/main/lib/website/build/heex_parser.ex) 
+the [full source code](https://forgejo.salamon.xyz/adrian/website/blob/main/lib/website/build/heex_parser.ex) 
 for more details.
 
 ## Image optimization
@@ -407,9 +407,9 @@ about how `EEx` and `HEEx` works, and I have created a website that I am happy
 with. It is fast, easy to work with, and has all the features that I want it to
 have. The best part is that if there is anything that I want to change, or a 
 feature that I want to add, I can just do it. The full source code for my website
-is available on [GitHub](https://github.com/adriansalamon/website).
+is available on my [Git Forge](https://forgejo.salamon.xyz/adrian/website).
 
 I hope that some of the ideas in this post and the source code for my website is
 useful or interesting. If you have any questions, comments or tips for
 improvement, feel free to reach out to me on
-[Twitter](https://twitter.com/adriansalamon). 
+[Twitter](https://twitter.com/adriansalamon).
