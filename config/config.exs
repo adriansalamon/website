@@ -3,7 +3,7 @@ import Config
 output_dir = "_site"
 
 config :esbuild,
-  version: "0.18.6",
+  version: "0.28.0",
   default: [
     args: ~w(js/app.js --bundle --target=es2016 --outdir=../#{output_dir}/assets),
     cd: Path.expand("../assets", __DIR__),
@@ -11,7 +11,7 @@ config :esbuild,
   ]
 
 config :tailwind,
-  version: "3.2.4",
+  version: "4.2.4",
   default: [
     cd: Path.expand("../assets", __DIR__),
     args: ~w(

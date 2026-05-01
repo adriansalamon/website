@@ -91,7 +91,7 @@ The component is defined in the following way:
 ```elixir
 def callout(assigns) do
   ~H"""
-  <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-sm lg:-mx-8">
+  <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-xs lg:-mx-8">
     <div class="flex flex-row items-center">
       <.icon name={:information_circle} class="mr-2 h-6 w-6" />
       <div class="prose-p:m-0">

@@ -153,7 +153,7 @@ defmodule Website.Components do
     ~H"""
     <div class={@class}>
       <div class={[
-        "rounded-full overflow-hidden bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur",
+        "rounded-full overflow-hidden bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-sm",
         (!@small && "h-8 w-8 sm:h-10 sm:w-10") || "h-7 w-7"
       ]}>
         <.link :if={Map.has_key?(assigns, :href)} href={@href} {@rest} class="pointer-events-auto">
@@ -244,7 +244,7 @@ defmodule Website.Components do
 
   def callout(assigns) do
     ~H"""
-    <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-sm lg:-mx-8">
+    <div class="rounded-lg border border-teal-200 bg-teal-50 px-8 py-4 shadow-xs lg:-mx-8">
       <div class="flex flex-row items-center">
         <.icon name={:information_circle} class="mr-2 h-6 w-6" />
         <div class="prose-p:m-0">
