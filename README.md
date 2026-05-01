@@ -28,5 +28,5 @@ MIX_ENV=prod mix site.build
 
 This will generate the site in `_site/`.
 
-Note: For post thumbnail image generation, you need to have the font `Inter`
+Note: For post thumbnail image generation, you need to have the fonts `Cardo` and `DM Sans`
 installed, see `build.sh`.
