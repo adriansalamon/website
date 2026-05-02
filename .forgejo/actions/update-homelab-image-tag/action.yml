@@ -37,10 +37,23 @@ runs:
         # Escape dots in image name for use in sed ERE
         ESCAPED_IMAGE=$(printf '%s' "$IMAGE_NAME" | sed 's/\./\\./g')
 
+        # run curl silently, but print the response body to stderr on failure
+        api() {
+          RESP=$(mktemp)
+          trap 'rm -f "$RESP"' RETURN
+          if ! curl -sS --fail-with-body -o "$RESP" \
+            -H "Authorization: token ${TOKEN}" \
+            -H "Content-Type: application/json" \
+            "$@"; then
+            echo "curl failed — response body:" >&2
+            cat "$RESP" >&2
+            return 1 >&2
+          fi
+          cat $RESP
+        }
+
         # --- Fetch current file ---
-        FILE_RESPONSE=$(curl -sf \
-          -H "Authorization: token ${TOKEN}" \
-          "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/contents/${FILE_PATH}")
+        FILE_RESPONSE=$(api "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/contents/${FILE_PATH}")
 
         FILE_SHA=$(echo "$FILE_RESPONSE" | jq -r '.sha')
 
@@ -61,29 +74,20 @@ runs:
         NEW_CONTENT_B64=$(base64 -w0 < "$UPDATED")
 
         # --- Create branch ---
-        curl -sf -X POST \
-          -H "Authorization: token ${TOKEN}" \
-          -H "Content-Type: application/json" \
-          "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/branches" \
-          -d "{\"new_branch_name\": \"${BRANCH}\", \"old_branch_name\": \"main\"}"
+        api -X POST "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/branches" \
+          -d "{\"new_branch_name\": \"${BRANCH}\", \"old_branch_name\": \"main\"}" > /dev/null
 
         # --- Commit updated file ---
-        curl -sf -X PUT \
-          -H "Authorization: token ${TOKEN}" \
-          -H "Content-Type: application/json" \
-          "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/contents/${FILE_PATH}" \
+        api -X PUT "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/contents/${FILE_PATH}" \
           -d "$(jq -n \
             --arg msg "chore: update ${IMAGE_NAME##*/} image to ${NEW_TAG}" \
             --arg content "$NEW_CONTENT_B64" \
             --arg sha "$FILE_SHA" \
             --arg branch "$BRANCH" \
-            '{message: $msg, content: $content, sha: $sha, branch: $branch}')"
+            '{message: $msg, content: $content, sha: $sha, branch: $branch}')" > /dev/null
 
         # --- Open PR ---
-        PR_URL=$(curl -sf -X POST \
-          -H "Authorization: token ${TOKEN}" \
-          -H "Content-Type: application/json" \
-          "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/pulls" \
+        PR_URL=$(api -X POST "${FORGEJO_API_URL}/repos/${HOMELAB_REPO}/pulls" \
           -d "$(jq -n \
             --arg title "chore: update ${IMAGE_NAME##*/} image to ${NEW_TAG}" \
             --arg body "Automated image tag update from [\`${FORGEJO_REPOSITORY}\`](${FORGEJO_SERVER_URL}/${FORGEJO_REPOSITORY}/commit/${GITHUB_SHA})." \
