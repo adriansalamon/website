@@ -49,3 +49,16 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=${{ steps.registry.outputs.registry }}/${{ github.repository }}:cache
           cache-to: type=registry,ref=${{ steps.registry.outputs.registry }}/${{ github.repository }}:cache,mode=max
+
+      - name: Extract short SHA
+        id: sha
+        run: echo "short=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
+      - name: Update homelab image tag
+        uses: ./.forgejo/actions/update-homelab-image-tag
+        with:
+          token: ${{ secrets.CI_BOT_TOKEN }}
+          homelab-repo: adrian/homelab
+          file-path: nomad/jobs/website.nix
+          image-name: ${{ steps.registry.outputs.registry }}/${{ github.repository }}
+          new-tag: ${{ steps.sha.outputs.short }}
