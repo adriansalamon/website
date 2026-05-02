@@ -55,10 +55,10 @@ jobs:
         run: echo "short=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
       - name: Update homelab image tag
-        uses: ./.forgejo/actions/update-homelab-image-tag
+        uses: https://forgejo.salamon.xyz/adrian/update-image-tag@v1
         with:
           token: ${{ secrets.CI_BOT_TOKEN }}
-          homelab-repo: adrian/homelab
+          target-repo: adrian/homelab
           file-path: nomad/jobs/website.nix
           image-name: ${{ steps.registry.outputs.registry }}/${{ github.repository }}
           new-tag: ${{ steps.sha.outputs.short }}
